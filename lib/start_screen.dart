@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 class StartScreen extends StatelessWidget {
   // если в классе нет const конструктора, ты вообще не сможешь написать const StartScreen().
-  const StartScreen({super.key});
+  const StartScreen(this.startQuiz, {super.key});
+
+  final void Function() startQuiz; // то же, что VoidCallback
 
   @override
   Widget build(BuildContext context) {
@@ -52,9 +54,14 @@ class StartScreen extends StatelessWidget {
           ),
           const SizedBox(height: 30),
           OutlinedButton.icon(
-            onPressed: () {
-              
-            }, // onPressed: () {} не может быть const/ нельзя написать const OutlinedButton 
+            // option #1
+            // onPressed: () {
+            //     startQuiz();
+            // }, // onPressed: () {} не может быть const/ нельзя написать const OutlinedButton 
+
+            // option #2
+            onPressed: startQuiz,
+
             style: OutlinedButton.styleFrom(foregroundColor: Colors.white),
             icon: const Icon(Icons.arrow_right_alt),
             label: const Text('Start Quiz'),

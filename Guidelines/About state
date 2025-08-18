@@ -1,0 +1,52 @@
+
+
+Every Flutter Widget has a built-in lifecycle: 
+A collection of methods that are automatically executed by Flutter (at certain points of time).
+
+There are three extremely important (stateful) widget lifecycle methods you should be aware of:
+
+initState(): Executed by Flutter when the StatefulWidget's State object is initialized
+
+build(): Executed by Flutter when the Widget is built for the first time AND after setState() was called
+
+dispose(): Executed by Flutter right before the Widget will be deleted (e.g., because it was displayed conditionally)
+
+You will encounter them all multiple times throughout the course - therefore you don't have to memorize them now and you will see them in action. It's still worth learning about them right now already.
+
+
+
+
+
+
+
+Что такое initState и чем он отличается от build
+initState()
+Вызывается ровно один раз при создании экземпляра State и его вставке в дерево.
+Используется для начальной инициализации: создать контроллеры, подписки, таймеры, 
+посчитать первичное состояние.
+Здесь не рендерят UI — только готовят данные для будущего build.
+Хорошая практика: вызывать super.initState() в начале метода:
+
+
+build(BuildContext)
+Может вызываться много раз: после setState, изменения размеров, темы, локали и т.д.
+Должен быть быстрым и чистым: только строить и возвращать дерево виджетов без побочных эффектов.
+Никаких долгих операций, запросов, подписок, setState() внутри build — для этого есть initState, 
+эффекты после кадра и т.п.
+
+
+
+
+
+последовательность
+Для твоего Quiz:
+
+Quiz (StatefulWidget) создаётся.
+createState() → создаётся _QuizState.
+_QuizState.initState() (инициализация activeScreen = StartScreen(...)).
+(опционально) didChangeDependencies()
+_QuizState.build() → рисуем UI.
+По нажатию кнопки в StartScreen → вызывается switchScreens() → setState(...).
+Фреймворк вызывает _QuizState.build() снова → теперь activeScreen = QuestionsScreen.
+Старый экран (StartScreen) получает dispose(), новый (QuestionsScreen) проходит свой цикл 
+(initState → build).
