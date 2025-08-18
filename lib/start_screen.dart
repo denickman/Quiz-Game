@@ -14,7 +14,10 @@ class StartScreen extends StatelessWidget {
             .min, // “Не растягивайся на весь экран по вертикали, а занимай только столько места, сколько нужно детям (Image)”.
 
         children: [
-          Image.asset('assets/images/quiz-logo.png', width: 300),
+          Opacity(
+            opacity: 0.6,
+            child: Image.asset('assets/images/quiz-logo.png', width: 300),
+            ),
 
           // Image.asset() нельзя сделать const. он создаёт Image динамически
           const SizedBox(height: 80),
@@ -35,10 +38,11 @@ class StartScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 30),
-          OutlinedButton(
-            onPressed: () {},
+          OutlinedButton.icon(
+            onPressed: () {}, // onPressed: () {} не может быть const/ нельзя написать const OutlinedButton 
             style: OutlinedButton.styleFrom(foregroundColor: Colors.white),
-            child: const Text('Start Quiz'),
+            icon: const Icon(Icons.arrow_right_alt),
+            label: const Text('Start Quiz'),
           ),
         ],
       ),
