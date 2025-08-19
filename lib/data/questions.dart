@@ -1,4 +1,4 @@
-import 'package:/second_app/models/quiz_question.dart';
+import 'package:second_app/models/quiz_question.dart';
 
 const questions = [
   QuizQuestion('What are the main building blocks of Flutter UIs?', [
