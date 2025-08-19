@@ -15,53 +15,44 @@ class Quiz extends StatefulWidget {
 
 class _QuizState extends State<Quiz> {
 
-// Alternative init 1
-  // Widget? activeScreen;
+  // Properties 
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   activeScreen = StartScreen(switchScreens);
-  // }
+  // Alternative 1
+  /*
+  Widget? activeScreen;
+  
+  @override
+  void initState() {
+    super.initState();
+    activeScreen = StartScreen(switchScreens);
+  }
+  */
 
-  // Alternative init 2
+  // Alternative 2
   var activeScreen = 'start-screen'; // name it`s up to you
 
   // final modifier - cannot change the entire list but can modify the existed already
-  List<String> selectedAnswers = [];
+  List<String> _selectedAnswers = [];
 
-  void switchScreens() {
-    setState(() { // re-execute build method
-      activeScreen = 'questions-screen'; // name it`s up to you
-    });
-  }
-
-  void chooseAnswer(String answer) {
-      selectedAnswers.add(answer);
-
-      // if this a last question, show final screen
-      if (selectedAnswers.length == questions.length) {
-          setState(() {
-            activeScreen = "results-screen";
-          });
-      }
-  }
+  // Build
 
   @override
   Widget build(BuildContext context) {
+    // alternative 1
+    // final screenWidget = activeScreen == 'start-screen' ? StartScreen(switchScreens) : const QuestionsScreen();
 
-  // alternative 1
-  // final screenWidget = activeScreen == 'start-screen' ? StartScreen(switchScreens) : const QuestionsScreen();
+    // alternative 2
+    Widget screenWidget = StartScreen(switchScreens);
 
-  // alternative 2
-   Widget screenWidget = StartScreen(switchScreens);
-
-   if (activeScreen == 'questions-screen') {
+    if (activeScreen == 'questions-screen') {
       screenWidget = QuestionsScreen(onSelectAnswer: chooseAnswer);
-   } else if (activeScreen == 'results-screen') {
-      screenWidget = ResultsScreen(chosenAnswers: selectedAnswers);
-   }
-   
+    } else if (activeScreen == 'results-screen') {
+      screenWidget = ResultsScreen(
+        chosenAnswers: _selectedAnswers,
+        onRestart: restartQuiz,
+        );
+    }
+
     return MaterialApp(
       home: Scaffold(
         body: Container(
@@ -82,9 +73,39 @@ class _QuizState extends State<Quiz> {
       ),
     );
   }
+
+
+  // Methods 
+
+   void switchScreens() {
+    setState(() {
+      // re-execute build method
+
+      // Alternative 1
+      //   activeScreen = StartScreen(switchScreens);
+
+      // Alternative 2
+      activeScreen = 'questions-screen'; // name it`s up to you
+    });
+  }
+
+  void chooseAnswer(String answer) {
+    _selectedAnswers.add(answer);
+
+    // if this a last question, show final screen
+    if (_selectedAnswers.length == questions.length) {
+      setState(() {
+        activeScreen = "results-screen";
+      });
+    }
+  }
+
+  void restartQuiz() {
+    setState(() {
+      _selectedAnswers = [];
+      activeScreen = 'start-screen';
+          });
+  }
 }
-
-
-
 
 
