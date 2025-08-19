@@ -42,7 +42,6 @@ class _QuizState extends State<Quiz> {
       // if this a last question, show final screen
       if (selectedAnswers.length == questions.length) {
           setState(() {
-            selectedAnswers = [];
             activeScreen = "results-screen";
           });
       }
@@ -60,7 +59,7 @@ class _QuizState extends State<Quiz> {
    if (activeScreen == 'questions-screen') {
       screenWidget = QuestionsScreen(onSelectAnswer: chooseAnswer);
    } else if (activeScreen == 'results-screen') {
-      screenWidget = const ResultsScreen();
+      screenWidget = ResultsScreen(chosenAnswers: selectedAnswers);
    }
    
     return MaterialApp(
