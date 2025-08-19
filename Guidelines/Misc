@@ -7,3 +7,39 @@ final List<String> answers; с const списком:
 нельзя ни переприсвоить,
 ни изменить содержимое (add, remove → ❌ ошибка).
 
+
+
+1. pub.dev (пакеты)
+Это официальный репозиторий библиотек и пакетов Dart/Flutter.
+Там лежат такие вещи, как:
+google_fonts (шрифты),
+http (работа с сетью),
+provider (state management),
+sqflite (SQLite база), и т.д.
+
+flutter pub add google_fonts
+в проект добавляется зависимость, она прописывается в pubspec.yaml, 
+скачивается в .pub-cache, и потом ты уже используешь её в коде
+
+import 'package:google_fonts/google_fonts.dart';
+
+
+
+
+
+2. Extensions в VS Code
+Это расширения самой IDE (Visual Studio Code).
+Они влияют не на твой код, а на то, как ты с ним работаешь.
+Примеры:
+Flutter extension (дает подсветку синтаксиса, автодополнение, hot reload, отладку).
+Dart extension.
+Themes, иконки, автогенерация кода.
+
+
+
+
+https://www.pub.dev/packages
+
+flutter pub add google_fonts
+
+https://www.fonts.google.com
