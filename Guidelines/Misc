@@ -25,8 +25,6 @@ import 'package:google_fonts/google_fonts.dart';
 
 
 
-
-
 2. Extensions в VS Code
 Это расширения самой IDE (Visual Studio Code).
 Они влияют не на твой код, а на то, как ты с ним работаешь.
@@ -34,7 +32,6 @@ import 'package:google_fonts/google_fonts.dart';
 Flutter extension (дает подсветку синтаксиса, автодополнение, hot reload, отладку).
 Dart extension.
 Themes, иконки, автогенерация кода.
-
 
 
 

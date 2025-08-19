@@ -4,7 +4,9 @@ import 'package:second_app/data/questions.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class QuestionsScreen extends StatefulWidget {
-  const QuestionsScreen({super.key});
+  const QuestionsScreen({super.key, required this.onSelectAnswer});
+
+  final void Function(String answer) onSelectAnswer;
 
   @override
   State<QuestionsScreen> createState() {
@@ -16,12 +18,24 @@ class _QeustionsScreenState extends State<QuestionsScreen> {
 
   var currentQuestionIndex = 0;
 
-  void answerQuestion() {
+  void answerQuestion(String selectedAnswer) {
+    /*
+    🔹 Что такое widget внутри _QuestionsScreenState
+
+      В классе _QuestionsScreenState у тебя нет прямого доступа к полям QuestionsScreen
+      (например, к onSelectAnswer).
+      Flutter специально даёт ссылку на родительский StatefulWidget через свойство widget.
+
+      То есть:
+      widget → это объект QuestionsScreen, который сейчас отрисован.
+      Соответственно, widget.onSelectAnswer → это обращение к параметру, 
+      который ты передал в QuestionsScreen при создании.
+    */
+    widget.onSelectAnswer(selectedAnswer);
     setState(() {
       currentQuestionIndex ++;
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +72,9 @@ class _QeustionsScreenState extends State<QuestionsScreen> {
             ...currentQuestion.getShuffledAnswers().map((answer) {
                 return AnswerButton(
                   answerText: answer, 
-                  onTap: answerQuestion);
+                  onTap: () {
+                    answerQuestion(answer);
+                  });
             }),
           ],
         ),

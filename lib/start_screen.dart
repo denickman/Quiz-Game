@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class StartScreen extends StatelessWidget {
   // если в классе нет const конструктора, ты вообще не сможешь написать const StartScreen().
@@ -25,20 +26,22 @@ class StartScreen extends StatelessWidget {
             ),
           */
 
-          // Option #2 
-          Image.asset(
-            'assets/images/quiz-logo.png',
+          // Option #2
+          Image.asset('assets/images/quiz-logo.png',
             width: 300,
             color: const Color.fromARGB(149, 255, 255, 255),
           ),
 
-
-
           // Image.asset() нельзя сделать const. он создаёт Image динамически
           const SizedBox(height: 80),
 
-          const Text(
-            'Learn Flutter the fun way!',
+          Text('Learn Flutter the fun way!',
+            style: GoogleFonts.lato(
+              color: Colors.amber.shade800, 
+              fontSize: 24
+              ),
+
+            /*
             style: TextStyle(
               color: Colors
                   .white, // Colors.white — это готовая константа в классе Colors.
@@ -51,13 +54,14 @@ class StartScreen extends StatelessWidget {
           */
               fontSize: 24,
             ),
+*/
           ),
           const SizedBox(height: 30),
           OutlinedButton.icon(
             // option #1
             // onPressed: () {
             //     startQuiz();
-            // }, // onPressed: () {} не может быть const/ нельзя написать const OutlinedButton 
+            // }, // onPressed: () {} не может быть const/ нельзя написать const OutlinedButton
 
             // option #2
             onPressed: startQuiz,
